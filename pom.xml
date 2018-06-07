@@ -76,7 +76,32 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+<distributionManagement>
+		<repository>
+			<id>central</id>
+			<name>Parivesh-PC-releases</name>
+			<url>http://192.168.1.4:8081/artifactory/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots</id>
+			<name>Parivesh-PC-snapshots</name>
+			<url>http://192.168.1.4:8081/artifactory/libs-release-local</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<profiles>
+		<profile>
+			<id>sonar</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!-- Optional URL to server. Default value is http://localhost:9000 -->
+				<sonar.host.url>
+					http://192.168.1.4:9000
+				</sonar.host.url>
+			</properties>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>
