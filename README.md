@@ -1,2 +1,2 @@
 # capstone-project
-Capstone Project for Devops Certification
+Capstone Project for Devops Certifications
