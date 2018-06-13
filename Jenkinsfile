@@ -1,6 +1,6 @@
 def CONTAINER_NAME="capstoneproject"
 def CONTAINER_TAG="latest"
-def DOCKER_HUB_USER="pariveshdocker"
+def DOCKER_HUB_USER="suryapotula"
 def HTTP_PORT="8080"
 
 node {
