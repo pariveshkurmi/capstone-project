@@ -14,9 +14,7 @@ node {
 	        checkout scm
 	    }
 	
-	    stage('Build and Test'){
-	        bat "${MAVEN_HOME}/bin/mvn clean verify"
-	    }
+	    
 	    stage("DockerBuild"){
 	    	withDockerServer([uri: 'tcp://192.168.99.100:2376']) {
 	    	echo "connected"
