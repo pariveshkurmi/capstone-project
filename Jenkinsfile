@@ -68,7 +68,7 @@ def pushToImage(containerName, tag, dockerUser, dockerPassword){
     bat "docker login -u $dockerUser -p $dockerPassword"
     bat "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
     bat "docker push $dockerUser/$containerName:$tag"
-    bat "Image push complete"
+    echo "Image push complete"
 }
 
 def runApp(containerName, tag, dockerHubUser, httpPort){
