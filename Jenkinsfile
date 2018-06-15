@@ -10,24 +10,24 @@ node {
 	        MAVEN_HOME = tool('myMaven')
 	    }
 	
+	    stage('Checkout') {
+	        checkout scm
+	    }
+	    
 		stage('Build and Test'){
 	        bat "${MAVEN_HOME}/bin/mvn clean verify"
 	    }
 	    
-	    stage('Checkout') {
-	        checkout scm
-	    }
-	
-		stage('Sonar'){
+		stage('Sonar SCA'){
 	        try {
-	            sh "mvn sonar:sonar"
+	            bat "${MAVEN_HOME}/bin/mvn sonar:sonar"
 	        } catch(error){
 	            echo "The sonar server could not be reached ${error}"
 	        }
 	     }
 	     
 	    stage('Publish to JFrog Artifactory'){
-	        sh "mvn clean deploy"
+	        bat "${MAVEN_HOME}/bin/mvn clean deploy"
 	    }
 	    
 	    stage("DockerBuild"){
