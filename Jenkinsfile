@@ -7,8 +7,7 @@ node {
     currentBuild.result = "SUCCESS"
     try{
 	    stage('Initialize'){
-	        def mavenHome  = tool 'myMaven'
-	        env.PATH = "${mavenHome}/bin"
+	        MAVEN_HOME = tool('myMaven')
 	    }
 	
 	    stage('Checkout') {
@@ -16,7 +15,7 @@ node {
 	    }
 	
 	    stage('Build and Test'){
-	        bat "mvn clean verify"
+	        bat "${MAVEN_HOME}/bin/mvn clean verify"
 	    }
 	    stage("DockerBuild"){
 	    	withDockerServer([uri: 'tcp://192.168.99.100:2376']) {
