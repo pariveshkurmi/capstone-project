@@ -15,7 +15,7 @@ node {
 	    }
 	
 	    stage('Build and Test'){
-	        bat "C://Users//Parivesh//.jenkins//tools//hudson.tasks.Maven_MavenInstallation//myMaven//bin mvn clean verify"
+	        bat "mvn clean verify"
 	    }
 	    stage("DockerBuild"){
 	    	withDockerServer([uri: 'tcp://192.168.99.100:2376']) {
