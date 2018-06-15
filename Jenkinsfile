@@ -14,7 +14,9 @@ node {
 	        checkout scm
 	    }
 	
-	    
+	    stage('Build and Test'){
+	        bat "${MAVEN_HOME}/bin/mvn clean verify"
+	    }
 	    stage("DockerBuild"){
 	    	withDockerServer([uri: 'tcp://192.168.99.100:2376']) {
 	    	echo "connected"
@@ -52,25 +54,25 @@ def imagePrune(containerName){
 
 def removeExistingContaier(containerName){
 	try {
-    	sh "docker rm -f $containerName"
+    	bat "docker rm -f $containerName"
     	echo "Remove Container complete"
    } catch(error){}
 }
 
 def imageBuild(containerName, tag){
-    sh "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
+    bat "docker build -t $containerName:$tag  -t $containerName --pull --no-cache ."
     echo "Image build complete"
 }
 
 def pushToImage(containerName, tag, dockerUser, dockerPassword){
-    sh "docker login -u $dockerUser -p $dockerPassword"
-    sh "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
-    sh "docker push $dockerUser/$containerName:$tag"
-    echo "Image push complete"
+    bat "docker login -u $dockerUser -p $dockerPassword"
+    bat "docker tag $containerName:$tag $dockerUser/$containerName:$tag"
+    bat "docker push $dockerUser/$containerName:$tag"
+    bat "Image push complete"
 }
 
 def runApp(containerName, tag, dockerHubUser, httpPort){
-    sh "docker pull $dockerHubUser/$containerName"
-    sh "docker run -d --rm -p $httpPort:$httpPort --name $containerName $containerName:$tag"
+    bat "docker pull $dockerHubUser/$containerName"
+    bat "docker run -d --rm -p $httpPort:$httpPort --name $containerName $containerName:$tag"
     echo "Application started on port: ${httpPort} (http)"
 }
