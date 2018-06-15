@@ -18,38 +18,20 @@ node {
 	    }
 	
 	    stage('Build and Test'){
-	        sh "mvn clean test"
+	        bat "mvn clean verify"
 	    }
+	    stage("DockerBuild"){
+	    	withDockerServer([uri: 'tcp://192.168.99.100:2376']) {
+	    	echo "connected"
+    			imagePrune(CONTAINER_NAME)
+    			imageBuild(CONTAINER_NAME, CONTAINER_TAG)
+    			withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                	pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
+            	}
+            	removeExistingContaier(CONTAINER_NAME)
+	        	runApp(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, HTTP_PORT)
+		 	}
 	    
-		stage('Sonar'){
-	        try {
-	            sh "mvn sonar:sonar"
-	        } catch(error){
-	            echo "The sonar server could not be reached ${error}"
-	        }
-	     }
-	     
-	     stage('Publish to JFrog Artifactory'){
-	        sh "mvn clean deploy"
-	    }
-	     
-	     stage("Image Prune"){
-	        imagePrune(CONTAINER_NAME)
-	    }
-	
-	    stage('Image Build'){
-	        imageBuild(CONTAINER_NAME, CONTAINER_TAG)
-	    }
-	    
-	    stage('Push to Docker Registry'){
-            withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
-                pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
-            }
-        }
-		
-		stage('Run App on container'){
-			removeExistingContaier(CONTAINER_NAME)
-	        runApp(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, HTTP_PORT)
 	    }
 	    
 	    stage('Build Result'){
