@@ -86,30 +86,10 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-
-
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-java</artifactId>
-			<version>1.2.5</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-junit</artifactId>
-			<version>1.2.5</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>2.52.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>info.cukes</groupId>
-			<artifactId>cucumber-spring</artifactId>
-			<version>1.2.5</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -122,12 +102,12 @@
 		<repository>
 			<id>central</id>
 			<name>Parivesh-PC-releases</name>
-			<url>http://192.168.1.4:8081/artifactory/libs-release-local</url>
+			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Parivesh-PC-snapshots</name>
-			<url>http://192.168.1.4:8081/artifactory/libs-release-local</url>
+			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<profiles>
@@ -139,7 +119,7 @@
 			<properties>
 				<!-- Optional URL to server. Default value is http://localhost:9000 -->
 				<sonar.host.url>
-					http://192.168.1.4:9000
+					http://localhost:9000
 				</sonar.host.url>
 			</properties>
 		</profile>
