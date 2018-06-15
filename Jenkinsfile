@@ -8,6 +8,7 @@ node {
     try{
 	    stage('Initialize'){
 	        def mavenHome  = tool 'myMaven'
+	        env.PATH = "D:/devops/apache-maven-3.5.3/bin"
 	    }
 	
 	    stage('Checkout') {
