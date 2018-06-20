@@ -18,7 +18,7 @@ node {
 	    }
 	
 	    stage('Build and Test'){
-	        sh "mvn clean install"
+	        sh "mvn clean verify"
 	    }
 	    
 		stage('Sonar'){
