@@ -15,7 +15,7 @@ node {
 	    }
 	    
 		stage('Build and Test'){
-	        bat "${MAVEN_HOME}/bin/mvn clean verify"
+	        bat "${MAVEN_HOME}/bin/mvn clean test"
 	    }
 	    
 		stage('Sonar SCA'){
