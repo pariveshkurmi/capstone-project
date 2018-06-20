@@ -28,17 +28,7 @@ public class LoginFunctionalTest {
 
 	@BeforeClass
 	public static void setup() {
-		/*FirefoxBinary binary = new FirefoxBinary();
-		binary.addCommandLineOptions("..headless");
-		System.setProperty("webdriver.gecko.driver", "C:/Program Files/Mozilla Firefox/firefox.exe");
-		// driver = new ChromeDriver();
-		FirefoxOptions firefoxOptions = new FirefoxOptions();
-		firefoxOptions.setBinary(binary);
-		driver = new FirefoxDriver();*/
-
-		//System.setProperty("webdriver.chrome.driver", "D:\\Drivers\\chromedriver_win32\\chromedriver.exe");
 		driver = new HtmlUnitDriver();
-	
 	}
 
 	@AfterClass
@@ -59,40 +49,18 @@ public class LoginFunctionalTest {
 		assertTrue(driver.getPageSource().contains("Welcome test!!"));
 	}
 
-	//@Test
+	@Test
 	public void loginFail() {
-		driver.get("http://localhost:8080/integratedlearningproject");
-		WebElement email = driver.findElement(By.name("email"));
-		WebElement pass = driver.findElement(By.name("password"));
-		WebElement button = driver.findElement(By.xpath("/html/body/form/div/button"));
-		email.sendKeys("parivesh.kumar@wipro.com");
-		pass.sendKeys("1234");
-		button.click();
-		assertTrue(driver.getPageSource().contains("Invalid username or password, Please try again with valid"));
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.get("http://localhost:6080/capstoneproject/login");
+		WebElement usernameFail = driver.findElement(By.name("username"));
+		WebElement passFail = driver.findElement(By.name("password"));
+		WebElement buttonFail = driver.findElement(By.name("submit"));
+		usernameFail.sendKeys("test");
+		passFail.sendKeys("test123");
+		buttonFail.click();
+		assertTrue(driver.getPageSource().contains("Reason: Bad credentials"));
 	}
-
-	/*
-	 * @Test public void registrationSuccess() {
-	 * driver.get("http://localhost:6080/integratedlearningproject/register.jsp"
-	 * ); WebElement firstname = driver.findElement(By.name("firstname"));
-	 * WebElement lastname = driver.findElement(By.name("lastname")); WebElement
-	 * confirmpass = driver.findElement(By.name("confirmpass")); WebElement
-	 * email = driver.findElement(By.name("email")); WebElement pass =
-	 * driver.findElement(By.name("pass")); WebElement button =
-	 * driver.findElement(By.xpath("/html/body/form/div/button"));
-	 * firstname.sendKeys("fname"); lastname.sendKeys("lname");
-	 * pass.sendKeys("1234"); confirmpass.sendKeys("1234");
-	 * email.sendKeys("aa@gmail.com"); button.click();
-	 * assertTrue(driver.getPageSource().contains("Book Store")); }
-	 * 
-	 * @Test public void forgotPasswordSuccess() {
-	 * driver.get("http://localhost:6080/Bookstore/forgotpassword.jsp");
-	 * WebElement confirmpass = driver.findElement(By.name("confirmpassword"));
-	 * WebElement email = driver.findElement(By.name("email")); WebElement pass
-	 * = driver.findElement(By.name("newpassword")); WebElement button =
-	 * driver.findElement(By.xpath("/html/body/form/div/button"));
-	 * pass.sendKeys("1234"); confirmpass.sendKeys("1234");
-	 * email.sendKeys("avinash.patel@wipro.com"); button.click();
-	 * assertTrue(driver.getPageSource().contains("Book Store")); }
-	 */
+	
+	
 }

@@ -27,10 +27,10 @@ node {
 	     }
 	     
 	    stage('Publish to JFrog Artifactory'){
-	        bat "${MAVEN_HOME}/bin/mvn clean deploy"
+	        bat "${MAVEN_HOME}/bin/mvn clean deploy -Dmaven.test.skip=true -DskipTests=false"
 	    }
 	    
-	    stage("DockerBuild"){
+	    stage("Docker Release and Deployment"){
 	    	withDockerServer([uri: 'tcp://192.168.99.100:2376']) {
 	    	echo "connected"
     			imagePrune(CONTAINER_NAME)

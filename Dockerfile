@@ -6,7 +6,7 @@ COPY src/ capstone/src/
 
 WORKDIR capstone/
 
-RUN mvn clean install -Dmaven.test.skip=true
+RUN mvn clean install -Dmaven.test.skip=true -DskipTests=false
 
 EXPOSE 8080
 
