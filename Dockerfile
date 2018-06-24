@@ -6,8 +6,6 @@ COPY src/ capstone/src/
 
 WORKDIR capstone/
 
-RUN mvn clean install -Dmaven.test.skip=true -DskipTests=false
-
 EXPOSE 8080
 
-ENTRYPOINT [ "java", "-jar", "/capstone/target/capstoneproject-0.0.1-SNAPSHOT.war"]
+ENTRYPOINT [ "java", "-jar", "capstoneproject-0.0.1-SNAPSHOT.war"]

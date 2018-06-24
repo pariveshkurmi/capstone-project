@@ -27,7 +27,7 @@ node {
 	     }
 	     
 	    stage('Publish to JFrog Artifactory'){
-	        bat "${MAVEN_HOME}/bin/mvn clean deploy -Dmaven.test.skip=true -DskipTests=false"
+	        bat "${MAVEN_HOME}/bin/mvn clean -Dmaven.test.skip=true -Dmaven.tomcat.skip=true -DskipTests=false deploy"
 	    }
 	    
 	    stage("Docker Release and Deployment"){
