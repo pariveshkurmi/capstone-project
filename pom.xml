@@ -102,12 +102,12 @@
 	<distributionManagement>
 		<repository>
 			<id>central</id>
-			<name>Parivesh-PC-releases</name>
+			<name>DESKTOP-I1K9MEQ-releases</name>
 			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
-			<name>Parivesh-PC-snapshots</name>
+			<name>DESKTOP-I1K9MEQ-snapshots</name>
 			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</snapshotRepository>
 	</distributionManagement>
