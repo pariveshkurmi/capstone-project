@@ -3,6 +3,9 @@ def CONTAINER_TAG="latest"
 def DOCKER_HUB_USER="pariveshdocker"
 def HTTP_PORT="8080"
 
+def userInput = true
+def didTimeout = false
+
 node {
     currentBuild.result = "SUCCESS"
     try{
@@ -28,6 +31,23 @@ node {
 	     
 	    stage('Publish to JFrog Artifactory'){
 	        bat "${MAVEN_HOME}/bin/mvn clean -Dmaven.test.skip=true -Dmaven.tomcat.skip=true -DskipTests=false deploy"
+	    }
+	    
+	    stage('Taking Admin Approval'){
+	        approval()
+	        
+	   //Taking action on approval     
+	       if (didTimeout) {
+                echo "no input was received before timeout"
+                
+                mail bcc: '', body: 'no input was received before timeout.', cc: '', from: '', replyTo: '', subject: 'Pipeline build failed', to: 'pariveshkurmi.mit@gmail.com'
+           } else if (userInput == true) {
+                echo "this was successful"
+           } else {
+                echo "this was not successful"
+                currentBuild.result = 'FAILURE'
+                mail bcc: '', body: 'Admin has not given Approval for furthur build process.', cc: '', from: '', replyTo: '', subject: 'Pipeline build failed', to: 'pariveshkurmi.mit@gmail.com'
+           } 
 	    }
 	    
 	    stage("Docker Release and Deployment"){
@@ -56,6 +76,28 @@ node {
       mail bcc: '', body: 'Pipeline error: ${err}\nFix me.', cc: '', from: '', replyTo: '', subject: 'Pipeline build failed', to: 'pariveshkurmi.mit@gmail.com'
     }
     
+}
+
+
+def approval(){
+    
+    try {
+            imeout(time: 15, unit: 'SECONDS') { // change to a convenient timeout for you
+            userInput = input(
+            id: 'Proceed1', message: 'Was this successful?', parameters: [
+            [$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']
+            ])
+        }
+    } catch(err) { // timeout reached or input false
+            def user = err.getCauses()[0].getUser()
+            if('SYSTEM' == user.toString()) { // SYSTEM means timeout.
+            didTimeout = true
+            } 
+            else {
+                   userInput = false
+                   echo "Aborted by: [${user}]"
+            }
+        }
 }
 
 def imagePrune(containerName){
