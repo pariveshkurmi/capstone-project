@@ -5,7 +5,7 @@
 
 	<groupId>com.capstone.project.web</groupId>
 	<artifactId>capstoneproject</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<name>capstoneproject</name>
@@ -102,12 +102,12 @@
 	<distributionManagement>
 		<repository>
 			<id>central</id>
-			<name>DESKTOP-I1K9MEQ-releases</name>
+			<name>Parivesh-PC-releases</name>
 			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
-			<name>DESKTOP-I1K9MEQ-snapshots</name>
+			<name>Parivesh-PC-snapshots</name>
 			<url>http://localhost:8081/artifactory/libs-release-local</url>
 		</snapshotRepository>
 	</distributionManagement>
