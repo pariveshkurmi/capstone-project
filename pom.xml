@@ -103,12 +103,12 @@
 		<repository>
 			<id>central</id>
 			<name>Parivesh-PC-releases</name>
-			<url>http://localhost:8081/artifactory/libs-release-local</url>
+			<url>http://192.168.99.1:8081/artifactory/libs-release-local</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Parivesh-PC-snapshots</name>
-			<url>http://localhost:8081/artifactory/libs-release-local</url>
+			<url>http://192.168.99.1:8081/artifactory/libs-release-local</url>
 		</snapshotRepository>
 	</distributionManagement>
 	<profiles>
