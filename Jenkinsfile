@@ -40,13 +40,13 @@ node {
    if (didTimeout) {
     echo "no input was received before timeout"
 
-    mail bcc: '', body: 'no input was received before timeout.', cc: '', from: '', replyTo: '', subject: 'Timeout', to: 'pariveshkurmi.mit@gmail.com'
+    mail bcc: '', body: 'no input was received before timeout.', cc: '', from: '', replyTo: '', subject: 'Timeout', to: 'surya0087@gmail.com'
    } else if (userInput == true) {
     echo "this was successful"
    } else {
     echo "this was not successful"
     currentBuild.result = 'FAILURE'
-    mail bcc: '', body: 'Admin has not given Approval for furthur build process.', cc: '', from: '', replyTo: '', subject: 'Pipeline build failed', to: 'pariveshkurmi.mit@gmail.com'
+    mail bcc: '', body: 'Admin has not given Approval for furthur build process.', cc: '', from: '', replyTo: '', subject: 'Pipeline build failed', to: 'surya0087@gmail.com'
    }
   }
 
@@ -79,7 +79,7 @@ node {
 
 def email(){
     emailext attachLog: true, body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS:
-    Check console output at $BUILD_URL to view the results.''', recipientProviders: [culprits(), developers()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'pariveshkurmi.mit@gmail.com'
+    Check console output at $BUILD_URL to view the results.''', recipientProviders: [culprits(), developers()], subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'surya0087@gmail.com'
 }
 def approval() {
 
