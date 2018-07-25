@@ -14,7 +14,7 @@ public class ErrorController {
 	public ModelAndView handleException
 		(HttpServletRequest request, Exception ex){
 		ModelAndView mv = new ModelAndView();
-
+		System.out.println("Hello world to controller");
 		mv.addObject("exception", ex.getLocalizedMessage());
 		mv.addObject("url", request.getRequestURL());
 		
