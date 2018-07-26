@@ -15,6 +15,7 @@ public class ErrorController {
 		(HttpServletRequest request, Exception ex){
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Hello world to controller");
+		System.out.println("change to trigger build");
 		mv.addObject("exception", ex.getLocalizedMessage());
 		mv.addObject("url", request.getRequestURL());
 		
