@@ -16,9 +16,6 @@ public class ErrorController {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("Hello world to controller");
 		System.out.println("change to trigger build");
-		System.out.println("chnage to trigger build 1");
-		System.out.println("change to trigger build 2");
-		System.out.println("change to trigger build 3");
 		mv.addObject("exception", ex.getLocalizedMessage());
 		mv.addObject("url", request.getRequestURL());
 		
